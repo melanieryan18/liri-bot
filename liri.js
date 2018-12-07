@@ -11,9 +11,10 @@ var fs = require("fs");
 var query = process.argv[3];
 
 // Check Keys
-console.log(keys);
+// console.log(keys);
 var option = process.argv[2];
 console.log(option);
+
 
 // Initialize Spotify client
 var spotify = new Spotify(keys.spotify);
@@ -24,8 +25,10 @@ switch (option) {
     case "spotify-this-song":
         spotifyCall(query);
         break;
+    case "concert-this":
+        concertThis(query);
     default:
-    // code block
+        console.log("Are you looking for something?");
 }
 
 
@@ -35,16 +38,12 @@ function spotifyCall(songName) {
         if (err) {
             return console.log('Error occurred: ' + err);
         }
-        console.log(data.tracks.items[0].name)
-        console.log(data.tracks.items[0].external_urls.spotify)
-        console.log(data.tracks.items[0].album.name)
-        console.log(data.tracks.items[0].artists[0].name)
+        console.log("\nTrack Info" + "\nArtist: " + data.tracks.items[0].artists[0].name + "\nSong: " + data.tracks.items[0].name + "\nLink: " + data.tracks.items[0].external_urls.spotify + "\nAlbum: " + data.tracks.items[0].album.name + "\n"+"\nGreat song! Search another :)")
     });
 }
 
 // MOVIE-THIS
 // Then run a request with axios to the OMDB API with the movie specified
-
 function movieThis(movieName) {
     if (!movieName) {
         movieName = "Mr. Nobody";
@@ -56,7 +55,7 @@ function movieThis(movieName) {
         function (response) {
             // console.log(response.data);
             // Data of Movie
-            console.log("\nMovie Title: " + response.data.Title + "\nMovie Release Year: " + response.data.Year + "\nRating" + response.data.Rated + "\nRelease Country: " + response.data.Country + "\nLanguage: " + response.data.Language + "\nPlot: " + response.data.Plot + "\nActors: " + response.data.Actors);
+            console.log("\nMovie Title: " + response.data.Title + "\nMovie Release Year: " + response.data.Year + "\nRating: " + response.data.Rated + "\nRelease Country: " + response.data.Country + "\nLanguage: " + response.data.Language + "\nPlot: " + response.data.Plot + "\nActors: " + response.data.Actors);
 
             if (!movieName) {
                 movieName = "Mr. Nobody";
@@ -64,4 +63,18 @@ function movieThis(movieName) {
         }
     );
 }
-// 
+
+
+// CONCERT-THIS
+// Then run a request with axios to the BiT API with the artist specified
+function concertThis(artist) {
+    var bandsQueryUrl = "https://rest.bandsintown.com/artists/" + artist + "/events?app_id=codingbootcamp";
+    // // This line is just to help us debug against the actual URL.
+    // Creating a request with axios to the queryUrl
+    axios.get(bandsQueryUrl).then(
+        function (response) {
+            console.log(response("\nArtist: " + process.argv[2] + "\Venue: " + response.data[0].venue.name) + "\nLocation: " + response.data[0].venue.country + "\nDate: " + response.data[0].datatime);
+
+            // Date of the Event (use moment to format this as "MM/DD/YYYY")
+        });
+}
