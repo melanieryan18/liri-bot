@@ -28,7 +28,7 @@ switch (option) {
     case "concert-this":
         concertThis(query);
     default:
-        console.log("Are you looking for something?");
+        console.log("Are you looking for something?\n");
 }
 
 
@@ -73,7 +73,8 @@ function concertThis(artist) {
     // Creating a request with axios to the queryUrl
     axios.get(bandsQueryUrl).then(
         function (response) {
-            console.log(response("\nArtist: " + process.argv[2] + "\Venue: " + response.data[0].venue.name) + "\nLocation: " + response.data[0].venue.country + "\nDate: " + response.data[0].datatime);
+          console.log("_Upcoming Events_");  
+          console.log("Artist: " + artist + "\nVenue: " + response.data[0].venue.name + "\nLocation: " + response.data[0].venue.country + "\nDate: " + response.data[0].datatime + "\nRock on dude!");
 
             // Date of the Event (use moment to format this as "MM/DD/YYYY")
         });
