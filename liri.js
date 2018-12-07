@@ -38,7 +38,7 @@ function spotifyCall(songName) {
         if (err) {
             return console.log('Error occurred: ' + err);
         }
-        console.log("\nTrack Info" + "\nArtist: " + data.tracks.items[0].artists[0].name + "\nSong: " + data.tracks.items[0].name + "\nLink: " + data.tracks.items[0].external_urls.spotify + "\nAlbum: " + data.tracks.items[0].album.name + "\n"+"\nGreat song! Search another :)")
+        console.log("\n_Track Info_" + "\nArtist: " + data.tracks.items[0].artists[0].name + "\nSong: " + data.tracks.items[0].name + "\nLink: " + data.tracks.items[0].external_urls.spotify + "\nAlbum: " + data.tracks.items[0].album.name + "\n"+"\nGreat song! Search another :)")
     });
 }
 
@@ -53,13 +53,13 @@ function movieThis(movieName) {
     // Creating a request with axios to the queryUrl
     axios.get(queryUrl).then(
         function (response) {
-            // console.log(response.data);
-            // Data of Movie
-            console.log("\nMovie Title: " + response.data.Title + "\nMovie Release Year: " + response.data.Year + "\nRating: " + response.data.Rated + "\nRelease Country: " + response.data.Country + "\nLanguage: " + response.data.Language + "\nPlot: " + response.data.Plot + "\nActors: " + response.data.Actors);
-
             if (!movieName) {
                 movieName = "Mr. Nobody";
-            }
+            }// console.log(response.data);
+            // Data of Movie
+            console.log("\n_Movie Info_" +"\nTitle: " + response.data.Title + "\nRelease Year: " + response.data.Year + "\nRating: " + response.data.Rated + "\nRelease Country: " + response.data.Country + "\nLanguage: " + response.data.Language + "\nPlot: " + response.data.Plot + "\nActors: " + response.data.Actors+ "\n"+"\n Love this one!");
+
+
         }
     );
 }
