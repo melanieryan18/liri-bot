@@ -80,8 +80,6 @@ function movieThis(movieName) {
 // Then run a request with axios to the BiT API with the artist specified
 function concertThis(artist) {
     var bandsQueryUrl = "https://rest.bandsintown.com/artists/" + artist + "/events?app_id=codingbootcamp";
-
-
     // // This line is just to help us debug against the actual URL.
     // Creating a request with axios to the queryUrl
     axios.get(bandsQueryUrl).then(
