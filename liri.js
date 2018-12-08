@@ -28,16 +28,15 @@ switch (option) {
     case "concert-this":
         concertThis(query);
     default:
-        // 1- read file 2- retrieve content 3-call function spotifyCall
+        // 1- read file
         fs.readFile("random.txt", "utf8", function (error, data) {
-            // If the code experiences any errors it will log the error to the console.
+            // 2-retrieve content & parse string
             var data = data.split(",");
             var thatWay = data[1];
-            // console.log(data);
-            // console.log(thatWay);
             if (error) {
                 return console.log(error);
             }
+            // 3-call function 
             spotifyCall(thatWay);
         })
 
