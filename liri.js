@@ -13,7 +13,7 @@ var query = process.argv[3];
 // Check Keys
 // console.log(keys);
 var option = process.argv[2];
-console.log(option);
+// console.log(option);
 
 
 // Initialize Spotify client
@@ -28,18 +28,23 @@ switch (option) {
     case "concert-this":
         concertThis(query);
     default:
-    // fs.readFile(`random.txt`)
-    // spotifyCall()
-    // read file 
-    // retrieve the "I want it that way"
-    // call the spotifyCall function with the value of "I want it that way"
-    // days 1 2 3 have good content for this
-
+        // 1- read file 2- retrieve content 3-call function spotifyCall
+        fs.readFile("random.txt", "utf8", function (error, data) {
+            // If the code experiences any errors it will log the error to the console.
+            var data = data.split(",");
+            var thatWay = data[1];
+            // console.log(data);
+            // console.log(thatWay);
+            if (error) {
+                return console.log(error);
+            }
+            spotifyCall(thatWay);
+        })
 
 }
 
-
-// Functions
+// FUNCTIONS
+// SPOTIFY-THIS-SONG
 function spotifyCall(songName) {
     spotify.search({ type: 'track', query: songName }, function (err, data) {
         if (err) {
@@ -76,24 +81,13 @@ function movieThis(movieName) {
 // Then run a request with axios to the BiT API with the artist specified
 function concertThis(artist) {
     var bandsQueryUrl = "https://rest.bandsintown.com/artists/" + artist + "/events?app_id=codingbootcamp";
+
+
     // // This line is just to help us debug against the actual URL.
     // Creating a request with axios to the queryUrl
     axios.get(bandsQueryUrl).then(
         function (response) {
-            var randomDate = response.data[0].datetime;
-            var randomFormat = parseFloat"2018-12-09T19:00:12";
-            var convertedDate = moment(randomDate, randomFormat);
-            console.log(randomDate)
-            console.log(convertedDate.format("MM/DD/YY"));
-
-            // Using scripts from moment.js write code below to complete each of the following.
-            // Console.log to confirm the code changes you made worked.
-            // console.log(response.data);
-            // 1 ...to convert the randomDate into three other date formats
-            console.log(convertedDate.format("MM/DD/YY"));
-            // console.log("_Upcoming Events_");
-            // console.log("Artist: " + artist + "\nVenue: " + response.data[0].venue.name + "\nLocatioresponse.data[0].datatimen: " + response.data[0].venue.country + "\nDate: " + + "\nRock on dude!");
-
-            // Date of the Event (use moment to format this as "MM/DD/YYYY")
+            console.log("_Upcoming Events_");
+            console.log("Artist: " + artist + "\nVenue: " + response.data[0].venue.name + "\nLocation: " + response.data[0].venue.country + "\nDate: " + response.data[0].datatime + "\nRock on dude!");
         });
 }
