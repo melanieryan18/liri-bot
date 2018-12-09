@@ -27,6 +27,7 @@ switch (option) {
         break;
     case "concert-this":
         concertThis(query);
+        break;
     default:
         // 1- read file
         fs.readFile("random.txt", "utf8", function (error, data) {
